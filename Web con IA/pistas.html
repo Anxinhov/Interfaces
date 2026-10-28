@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SportBook - Seleccionar pista</title>
+
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+
+<header class="header">
+
+    <div class="logo">
+        SPORT<span>BOOK</span>
+    </div>
+
+    <nav>
+        <a href="index.html">Inicio</a>
+        <a href="#">Mis reservas</a>
+        <a href="#">Contacto</a>
+    </nav>
+
+</header>
+
+
+<main class="container">
+
+    <!-- PASOS -->
+
+    <div class="steps">
+
+        <div class="step active">
+            <span>1</span>
+            Deporte
+        </div>
+
+        <div class="step active">
+            <span>2</span>
+            Pista y horario
+        </div>
+
+        <div class="step">
+            <span>3</span>
+            Pago
+        </div>
+
+        <div class="step">
+            <span>4</span>
+            Confirmación
+        </div>
+
+    </div>
+
+
+    <section class="booking">
+
+        <div>
+
+            <h1 id="titulo-deporte">
+                Selecciona tu pista
+            </h1>
+
+            <p class="subtitle">
+                Elige una pista, una fecha y una hora.
+            </p>
+
+
+            <!-- PISTAS -->
+
+            <h2 class="section-title">
+                Pistas disponibles
+            </h2>
+
+
+            <div class="courts">
+
+                <article class="court-card selected"
+                         onclick="seleccionarPista(this, 'Pista 1')">
+
+                    <div class="court-icon">
+                        🎾
+                    </div>
+
+                    <div>
+                        <h3>Pista 1</h3>
+                        <p>Pista cubierta · 4 jugadores</p>
+                    </div>
+
+                    <div class="court-price">
+                        18 €
+                    </div>
+
+                </article>
+
+
+                <article class="court-card"
+                         onclick="seleccionarPista(this, 'Pista 2')">
+
+                    <div class="court-icon">
+                        🎾
+                    </div>
+
+                    <div>
+                        <h3>Pista 2</h3>
+                        <p>Pista exterior · 4 jugadores</p>
+                    </div>
+
+                    <div class="court-price">
+                        16 €
+                    </div>
+
+                </article>
+
+
+                <article class="court-card"
+                         onclick="seleccionarPista(this, 'Pista 3')">
+
+                    <div class="court-icon">
+                        🎾
+                    </div>
+
+                    <div>
+                        <h3>Pista 3</h3>
+                        <p>Pista cubierta · 4 jugadores</p>
+                    </div>
+
+                    <div class="court-price">
+                        20 €
+                    </div>
+
+                </article>
+
+            </div>
+
+
+            <!-- FECHA -->
+
+            <h2 class="section-title">
+                Selecciona una fecha
+            </h2>
+
+            <input
+                type="date"
+                id="fecha"
+                class="date-input"
+            >
+
+
+            <!-- HORAS -->
+
+            <h2 class="section-title">
+                Horas disponibles
+            </h2>
+
+
+            <div class="time-grid">
+
+                <button onclick="seleccionarHora(this)">
+                    10:00
+                </button>
+
+                <button onclick="seleccionarHora(this)">
+                    11:00
+                </button>
+
+                <button class="disabled">
+                    12:00
+                </button>
+
+                <button onclick="seleccionarHora(this)">
+                    13:00
+                </button>
+
+                <button onclick="seleccionarHora(this)">
+                    16:00
+                </button>
+
+                <button onclick="seleccionarHora(this)">
+                    17:00
+                </button>
+
+                <button onclick="seleccionarHora(this)">
+                    18:00
+                </button>
+
+                <button onclick="seleccionarHora(this)">
+                    19:00
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- RESUMEN -->
+
+        <aside class="summary">
+
+            <h2>Resumen</h2>
+
+            <div class="summary-line">
+                <span>Deporte</span>
+                <strong id="resumen-deporte">
+                    Pádel
+                </strong>
+            </div>
+
+            <div class="summary-line">
+                <span>Pista</span>
+                <strong id="resumen-pista">
+                    Pista 1
+                </strong>
+            </div>
+
+            <div class="summary-line">
+                <span>Fecha</span>
+                <strong id="resumen-fecha">
+                    -
+                </strong>
+            </div>
+
+            <div class="summary-line">
+                <span>Hora</span>
+                <strong id="resumen-hora">
+                    -
+                </strong>
+            </div>
+
+            <hr>
+
+            <div class="total">
+                <span>Total</span>
+                <strong id="precio">
+                    18 €
+                </strong>
+            </div>
+
+
+            <button
+                class="btn-primary full"
+                onclick="continuarPago()">
+
+                Continuar al pago
+
+            </button>
+
+        </aside>
+
+    </section>
+
+</main>
+
+
+<script>
+
+let pistaSeleccionada = "Pista 1";
+let horaSeleccionada = "";
+let precioSeleccionado = 18;
+
+
+// Obtener deporte de la URL
+
+const params = new URLSearchParams(window.location.search);
+
+const deporte = params.get("deporte");
+
+
+// Cambiar textos según deporte
+
+if (deporte) {
+
+    const nombres = {
+        futbol: "Fútbol",
+        padel: "Pádel",
+        tenis: "Tenis",
+        baloncesto: "Baloncesto"
+    };
+
+    const nombre = nombres[deporte] || "Deporte";
+
+    document.getElementById("titulo-deporte").textContent =
+        "Pistas de " + nombre;
+
+    document.getElementById("resumen-deporte").textContent =
+        nombre;
+
+}
+
+
+// Seleccionar pista
+
+function seleccionarPista(elemento, pista) {
+
+    document
+        .querySelectorAll(".court-card")
+        .forEach(card => card.classList.remove("selected"));
+
+    elemento.classList.add("selected");
+
+    pistaSeleccionada = pista;
+
+    document.getElementById("resumen-pista").textContent =
+        pista;
+
+}
+
+
+// Seleccionar hora
+
+function seleccionarHora(elemento) {
+
+    document
+        .querySelectorAll(".time-grid button")
+        .forEach(button => button.classList.remove("selected"));
+
+    elemento.classList.add("selected");
+
+    horaSeleccionada = elemento.textContent.trim();
+
+    document.getElementById("resumen-hora").textContent =
+        horaSeleccionada;
+
+}
+
+
+// Fecha
+
+document.getElementById("fecha").addEventListener(
+    "change",
+    function() {
+
+        document.getElementById("resumen-fecha").textContent =
+            this.value;
+
+    }
+);
+
+
+// Continuar
+
+function continuarPago() {
+
+    const fecha =
+        document.getElementById("fecha").value;
+
+    if (!fecha) {
+
+        alert("Selecciona una fecha.");
+
+        return;
+
+    }
+
+    if (!horaSeleccionada) {
+
+        alert("Selecciona una hora.");
+
+        return;
+
+    }
+
+
+    const reserva = {
+
+        deporte: deporte,
+
+        pista: pistaSeleccionada,
+
+        fecha: fecha,
+
+        hora: horaSeleccionada,
+
+        precio: precioSeleccionado
+
+    };
+
+
+    localStorage.setItem(
+        "reserva",
+        JSON.stringify(reserva)
+    );
+
+
+    window.location.href = "pago.html";
+
+}
+
+</script>
+
+</body>
+</html>

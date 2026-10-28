@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>SportBook - Reserva confirmada</title>
+
+    <link rel="stylesheet"
+          href="css/styles.css">
+
+</head>
+
+
+<body>
+
+<header class="header">
+
+    <div class="logo">
+        SPORT<span>BOOK</span>
+    </div>
+
+    <nav>
+        <a href="index.html">Inicio</a>
+        <a href="#">Mis reservas</a>
+        <a href="#">Contacto</a>
+    </nav>
+
+</header>
+
+
+<main class="confirmation">
+
+    <div class="success-icon">
+        ✓
+    </div>
+
+
+    <h1>
+        ¡Reserva confirmada!
+    </h1>
+
+    <p>
+        Tu reserva se ha realizado correctamente.
+    </p>
+
+
+    <div class="confirmation-card">
+
+        <div
+            id="qrcode"
+            class="qrcode">
+        </div>
+
+
+        <h2 id="codigo">
+            SP-000000
+        </h2>
+
+        <p class="qr-description">
+            Presenta este código QR al llegar
+            a las instalaciones.
+        </p>
+
+
+        <hr>
+
+
+        <div class="reservation-info">
+
+            <div>
+                <span>Deporte</span>
+                <strong id="deporte"></strong>
+            </div>
+
+            <div>
+                <span>Pista</span>
+                <strong id="pista"></strong>
+            </div>
+
+            <div>
+                <span>Fecha</span>
+                <strong id="fecha"></strong>
+            </div>
+
+            <div>
+                <span>Hora</span>
+                <strong id="hora"></strong>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="confirmation-actions">
+
+        <button
+            class="btn-primary"
+            onclick="window.print()">
+
+            🖨️ Descargar reserva
+
+        </button>
+
+
+        <a
+            href="index.html"
+            class="btn-secondary">
+
+            Volver al inicio
+
+        </a>
+
+    </div>
+
+</main>
+
+
+<!-- Librería QR -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js">
+</script>
+
+
+<script>
+
+const reserva =
+    JSON.parse(localStorage.getItem("reserva"));
+
+
+if (!reserva) {
+
+    window.location.href =
+        "index.html";
+
+}
+
+
+// Mostrar datos
+
+document.getElementById("codigo")
+    .textContent = reserva.codigo;
+
+document.getElementById("deporte")
+    .textContent = reserva.deporte;
+
+document.getElementById("pista")
+    .textContent = reserva.pista;
+
+document.getElementById("fecha")
+    .textContent = reserva.fecha;
+
+document.getElementById("hora")
+    .textContent = reserva.hora;
+
+
+// Crear QR
+
+new QRCode(
+    document.getElementById("qrcode"),
+    {
+        text: reserva.codigo,
+        width: 180,
+        height: 180
+    }
+);
+
+</script>
+
+</body>
+</html>
