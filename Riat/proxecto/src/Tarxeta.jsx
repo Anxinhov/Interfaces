@@ -1,8 +1,8 @@
 function disponible(dispoñible){
     if(dispoñible){
-        return"Libre ✅"
+        return"Libre✅"
     }else{
-        return"Ocupada ❌"
+        return"Ocupada❌"
     }
 }
 
