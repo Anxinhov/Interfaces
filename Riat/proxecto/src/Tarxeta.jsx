@@ -19,9 +19,9 @@ export default function Tarxeta({pista}){
             <p>{pista.tipo}</p>
             <p>{pista.estado}</p>
             
-            <a href="pistas.html?deporte=padel" className="btn-primary">
+            <button href="pistas.html?deporte=padel" className="btn-primary">
                 Reservar
-            </a>
+            </button>
             </div>
         </article>
 }
