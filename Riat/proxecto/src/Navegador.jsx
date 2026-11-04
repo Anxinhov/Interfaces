@@ -1,6 +1,6 @@
-function bucle(elementos){
+function Bucle({elementos}){
   const objetos = []
-  for(i=2;i<elementos.lenght();i++){
+  for(let i=2;i<elementos.lenght;i++){
     objetos.push(<a className="nav-link" href="#">{elementos[i]}</a>)
   }
   return objetos
@@ -21,8 +21,8 @@ export default function Navegador({elementos}){
       <div className="drawer-body">
         <div className="nav nav-pills navbar-nav">
           <a className="nav-link active" aria-current="page" href="#">{elementos[1]}</a>
-          <bucle elementos={elementos}></bucle>
-        </div>
+          <Bucle elementos={elementos}/>
+        </div> 
       </div>
     </dialog>
   </div>

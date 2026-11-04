@@ -1,7 +1,7 @@
 // Versión estática: solo JSX, map y key (contenido de la unidad)
 
 
-{/*function Cadrado() {
+function Cadrado() {
   const cuadrados = []
   for(let i = 1; i <= 9; i = i + 3){
   cuadrados.push(
@@ -21,7 +21,7 @@ export default function Taboleiro() {
     <Cadrado/>        
   </>);
 }
-  Ejercicio 1
+  {/*Ejercicio 1
   const produtos = [
   { id: 1, nome: "Teclado", prezo: 25 },
   { id: 2, nome: "Rato", prezo: 15 },
