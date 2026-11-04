@@ -7,21 +7,14 @@ function disponible(dispoñible){
 }
 
 export default function Tarxeta({pista}){
-    return<article className="sport-card">
-        <div className="sport-image padel">
-            🎾
-        </div>
-
-        <div className="sport-info">
-            <h2>{pista.nombre}</h2>
-            <h3>{pista.deporte}</h3>
-            <p>{disponible(pista.dispoñible)}</p>
-            <p>{pista.tipo}</p>
-            <p>{pista.estado}</p>
-            
-            <button href="pistas.html?deporte=padel" className="btn-primary">
-                Reservar
-            </button>
-            </div>
-        </article>
+    return<section className="card" style={{maxWidth: '320px'}}>
+  <img src={pista.imagen} className="card-img-top" alt="..." style={{maxWidth: '320px'}}></img>
+  <div className="card-body">
+    <h4 className="card-title">{pista.nombre}</h4>
+    <p className="card-text">{disponible(pista.dispoñible)}</p>
+    <p className="card-text">{pista.tipo}</p>
+    <p className="card-text">{pista.estado}</p>
+    <a href="#" className="btn-solid theme-primary">reservar</a>
+  </div>
+</section>
 }
