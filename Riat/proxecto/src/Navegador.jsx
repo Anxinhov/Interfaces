@@ -1,7 +1,7 @@
 function Bucle({elementos}){
   const objetos = []
-  for(let i=2;i<elementos.lenght;i++){
-    objetos.push(<a className="nav-link" href="#">{elementos[i]}</a>)
+  for(let i=2;i<elementos.length;i++){
+    objetos.push(<a className="nav-link" href="#" key={elementos[i]}>{elementos[i]}</a>)
   }
   return objetos
 }

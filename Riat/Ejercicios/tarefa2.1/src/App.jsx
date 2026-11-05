@@ -1,24 +1,42 @@
 // Versión estática: solo JSX, map y key (contenido de la unidad)
 
+import { useState } from "react";
+
 
 function Cadrado() {
-  const cuadrados = []
-  for(let i = 1; i <= 9; i = i + 3){
-  cuadrados.push(
-  <div className="board-row">
-  <button className="square"> {i}</button>
-  <button className="square"> {i+1}</button>
-  <button className="square"> {i+2}</button>
-  </div>
+
+  const [valor, setValor] = useState(null)
+
+function onClic(){
+  setValor('X')
+}
+  return (
+  <button
+    className="square"
+    onClick={onClic}>
+      {valor}
+  </button>
   )
-  }
-  return cuadrados;
 }
 export default function Taboleiro() {
   
   return (
   <>
-    <Cadrado/>        
+    <div>
+      <Cadrado />
+      <Cadrado />
+      <Cadrado />    
+    </div>
+    <div>
+      <Cadrado />
+      <Cadrado />
+      <Cadrado />    
+    </div>
+    <div>
+      <Cadrado />
+      <Cadrado />
+      <Cadrado />    
+    </div>       
   </>);
 }
   {/*Ejercicio 1
