@@ -18,16 +18,25 @@ const linguaxes = [
 ];
 
 export default function App() {
-  const elementos = linguaxes.map((linguaxe) => (
+  const Interpretadas = linguaxes.filter((linguaxe) =>linguaxe.tipo == "interpretada").map((linguaxe) => (
     <li key={linguaxe.id}>
       <b>{linguaxe.nome}</b> ({linguaxe.tipo}, {linguaxe.ano})
     </li>
-  ));
+  ))
+  const Compiladas = linguaxes.filter((linguaxe) =>linguaxe.tipo == "compilada").map((linguaxe) => (
+    <li key={linguaxe.id}>
+      <b>{linguaxe.nome}</b> ({linguaxe.tipo}, {linguaxe.ano})
+    </li>
+  ))
 
   return (
     <article>
       <h1>Linguaxes de programación</h1>
-      <ul>{elementos}</ul>
+      <h2>Interpretadas</h2>
+      <ul>{Interpretadas}</ul>
+      <h2>Compiladas</h2>
+      <ul>{Compiladas}</ul>
     </article>
   );
 }
+

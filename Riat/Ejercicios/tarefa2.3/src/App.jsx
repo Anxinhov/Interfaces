@@ -127,12 +127,14 @@ const pasos = [
 ];
 
 export default function App() {
-  const elementos = pasos.map((paso, indice) =>(indice>0)? <p key={paso.id}><hr></hr>{paso.texto}</p>: <p key={paso.id}>{paso.texto}</p>);
 
   return (
     <article>
       <h1>Como despregar o proxecto</h1>
-      {elementos}
+      {pasos.map((paso, indice) => 
+      <p key={paso.id}>
+      {indice>0 &&<hr></hr>}
+      {paso.texto}</p>)}
     </article>
   );
 }

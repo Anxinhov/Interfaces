@@ -14,6 +14,8 @@
 
 // import { Fragment } from "react";
 
+import { Fragment } from "react";
+
 const pasos = [
   { id: 1, texto: "Executa npm run build." },
   { id: 2, texto: "Proba a versión final con npm run preview." },
@@ -22,7 +24,7 @@ const pasos = [
 ];
 
 export default function App() {
-  const elementos = pasos.map((paso) => <p key={paso.id}>{paso.texto}</p>);
+  const elementos = pasos.map((paso, indice) =>(indice>0)? <p key={paso.id}><hr></hr>{paso.texto}</p>: <p key={paso.id}>{paso.texto}</p>);
 
   return (
     <article>
