@@ -35,26 +35,37 @@ function calcularGanador(cadrados) {
 }
 
 export default function xogo(){
-const [xTurno, setXturno] = useState(true)
 const [historial, setHistorial] = useState([Array(9).fill(null)])
-const cadradosActuais = historial[historial.length-1]
+const [movementoActual, setMovementoActual] = useState(0)
+const cadradosActuais = historial[movementoActual]
+const xTurno =(movementoActual % 2 === 0)
+const [ascendente, setAscendente] = useState(true)
+
 function handleXogo(novosCadrados){
-  setHistorial ([...historial,novosCadrados])
-  setXturno (!xTurno)
-  console.log(historial)
+  const novoHistorial = [...historial.slice(0,movementoActual +1),novosCadrados]
+  setHistorial (novoHistorial)
+  setMovementoActual (novoHistorial.length - 1);
+  
 }
+
 function ClickMovemento(index){
   novosCadrados
 }
+
+function saltarA(movemento) {
+  setMovementoActual(movemento)
+}
+
 const movementos = historial.map(
-  (movimiento, index) => <button onClick={}>{index == 0 && "Ir al inicio del juego"}{index != 0 && "Ir al movimiento #"+index}</button>
+  (movimiento, index) =><li key={index}>{index == movementoActual && <p>Estas en el turno #{movementoActual}</p>}{index != movementoActual && <button onClick={()=>saltarA(index)}>{index == 0 && "Ir al inicio del juego"}{index != 0 && "Ir al movimiento #"+index}</button>}</li>
 )
   return<>
     <div className="game">
     <div className="game-info">
       <ol>
-        {movementos}
+        {ascendente && movementos}{!ascendente && movementos.reverse()}
       </ol>
+      <button onClick={() => setAscendente(!ascendente)}>Cambiar orden</button>
     </div>
     <div className="game-board">
       <Taboleiro xTurno={xTurno} cadrados={cadradosActuais} onXogar={handleXogo}/>
@@ -90,19 +101,7 @@ export function Taboleiro({xTurno, cadrados, onXogar}) {
     
     <div>{estado}</div>
     <div>
-      <Cadrado valor={cadrados[0]} onCadradoClick={() => handleClick(0)}/>
-      <Cadrado valor={cadrados[1]} onCadradoClick={() => handleClick(1)}/>
-      <Cadrado valor={cadrados[2]} onCadradoClick={() => handleClick(2)}/>    
-    </div>
-    <div>
-      <Cadrado valor={cadrados[3]} onCadradoClick={() => handleClick(3)}/>
-      <Cadrado valor={cadrados[4]} onCadradoClick={() => handleClick(4)}/>
-      <Cadrado valor={cadrados[5]} onCadradoClick={() => handleClick(5)}/>    
-    </div>
-    <div>
-      <Cadrado valor={cadrados[6]} onCadradoClick={() => handleClick(6)}/>
-      <Cadrado valor={cadrados[7]} onCadradoClick={() => handleClick(7)}/>
-      <Cadrado valor={cadrados[8]} onCadradoClick={() => handleClick(8)}/>    
-    </div>       
+    {cadrados.map((cadrado,index) =><span key={index}><Cadrado valor={cadrados[index]} onCadradoClick={() => handleClick(index)}/>{(index+1) % 3 === 0 && <div></div>}</span>)}
+    </div>     
   </>);
 }
